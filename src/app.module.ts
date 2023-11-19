@@ -6,6 +6,9 @@ import { AppService } from './app.service';
 import { AppCommands } from './app.commands';
 import { AppUpdate } from './app.update';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GuildService } from './guild.service';
+import { PrismaService } from './prisma.service';
+import { CodeService } from './code.service';
 
 @Module({
   imports: [
@@ -22,6 +25,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, AppCommands, AppUpdate],
+  providers: [
+    AppService,
+    AppCommands,
+    AppUpdate,
+    GuildService,
+    CodeService,
+    PrismaService,
+  ],
 })
 export class AppModule {}
