@@ -15,12 +15,25 @@ model Guild {
   codes Code[]
 }
 
+model Permission {
+  roleId String
+
+  code        Code   @relation(fields: [codeGuildId, codeName], references: [guildId, name])
+  codeGuildId String
+  codeName    String
+
+  @@id([codeGuildId, codeName, roleId])
+}
+
 model Code {
   name String
   key  String
 
   Guild   Guild  @relation(fields: [guildId], references: [id])
   guildId String
+
+  roles Permission[]
+  owner String
 
   @@id([guildId, name])
 }
