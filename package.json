@@ -1,8 +1,8 @@
 {
   "name": "2fa-bot",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "0.1.0",
+  "description": "A Discord bot to provide shared access to 2FA codes",
+  "author": "lhvy",
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
