@@ -169,7 +169,7 @@ export class AppCommands {
     const roleIds = member.roles.cache.map((role) => role.id);
     if (
       code.owner !== userId &&
-      !code.roles.some((role) => role.roleId in roleIds)
+      !code.roles.some((role) => roleIds.includes(role.roleId))
     ) {
       return interaction.reply({
         content: 'You do not have permission to access this code!',
