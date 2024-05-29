@@ -16,4 +16,5 @@ FROM base
 ENV NODE_ENV="production"
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
+RUN apt-get update && apt-get install -y openssl
 CMD [ "pnpm", "start:prod" ]
