@@ -5,15 +5,18 @@ RUN corepack enable
 COPY . /app
 WORKDIR /app
 
-FROM base AS prod-deps
+FROM base AS openssl
+RUN apt-get update && apt-get install -y openssl
+
+FROM openssl AS prod-deps
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
-FROM base AS build
+FROM openssl AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm npx prisma generate
 RUN pnpm run build
 
-FROM base
+FROM openssl
 ENV NODE_ENV="production"
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
