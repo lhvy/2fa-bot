@@ -18,4 +18,4 @@ FROM base
 ENV NODE_ENV="production"
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
-CMD [ "pnpm", "start:prod" ]
+CMD pnpm npx prisma generate && pnpm npx prisma migrate deploy && pnpm start:prod
